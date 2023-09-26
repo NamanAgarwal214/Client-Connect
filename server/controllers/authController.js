@@ -149,5 +149,5 @@ exports.verifyOTP = async (req, res, next) => {
   // console.log(otp, res.locals.id);
   const user = await User.findById(res.locals.id);
   verifyOtp(user.phone, otp);
-  res.redirect("/dashboard");
+  // res.redirect("/dashboard");
 };

@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 exports.issueToken = (res, user) => {
   const id = user._id;
   const token = jwt.sign({ sub: id }, process.env.JWT_SECRET, {

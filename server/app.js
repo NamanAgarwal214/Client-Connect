@@ -51,7 +51,7 @@ cron.schedule("* * * * *", async function () {
 });
 
 //auth routes
-// app.use("/", mainRoutes);
+app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/booking", bookingRoutes);
 

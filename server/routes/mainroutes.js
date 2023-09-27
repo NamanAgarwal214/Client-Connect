@@ -1,10 +1,10 @@
 // const User = require("../models/userModel");
-// // const authController = require("../controllers/authController");
+const authController = require("../controllers/authController");
 // const userController = require("../controllers/userController");
 // const postController = require("../controllers/postController");
 // const authuser = require("../models/authModel");
 // const { verifyOtp } = require("../utils/twilio");
-// const router = require("express").Router();
+const router = require("express").Router();
 
 // const authcheck = (req, res, next) => {
 //   if (!req.user) {
@@ -88,17 +88,11 @@
 //   }
 // );
 
-// router.get("/register", (req, res) => {
-//   res.render("signup_multiform");
-// });
+router.get("/register", (req, res) => {
+  res.render("signup_multiform");
+});
 
-// router.post("/register", authController.register, async (req, res) => {
-//   let oldUser = await User.find({ email: req.body.email });
-//   oldUser.forEach((obj) => {
-//     userdetails = obj;
-//   });
-//   res.redirect("/verifyOtp");
-// });
+router.post("/register", authController.register);
 
 // // -----------------------end of Routing for dashboard using Register ----------------------------------
 
@@ -258,4 +252,4 @@
 //   }
 // );
 
-// module.exports = router;
+module.exports = router;

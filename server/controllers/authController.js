@@ -7,8 +7,12 @@ const { sendOtp, verifyOtp } = require("../utils/twilio");
 const { issueToken } = require("../utils/token");
 require("dotenv").config();
 
-exports.register = async (req, res, next) => {
+exports.register = async (req, res) => {
   try {
+    const oldUser = await User.findOne({ email: req.body.email });
+    if (oldUser) {
+      return res.render("signup_multiform");
+    }
     const user = new User({
       name: req.body.name,
       email: req.body.email,
@@ -17,16 +21,17 @@ exports.register = async (req, res, next) => {
     });
 
     await user.save();
-    sendOtp(req.body.phone);
+    // sendOtp(req.body.phone);
 
     const token = issueToken(res, user);
     res.locals.user = { user: user, token: token };
-    return next();
+    res.render("signup_multiform");
   } catch (err) {
-    return res.json({
-      status: "error",
-      message: err.message,
-    });
+    // return res.json({
+    //   status: "error",
+    //   message: err.message,
+    // });
+    console.log(err.message);
   }
 };
 

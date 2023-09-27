@@ -34,55 +34,40 @@ const Register = () => {
 
   return (
     <div className="container">
-      <h1>Register</h1>
-      <form id="regForm">
-        <div className="tab">
-          <div className="flex">
-            <p>
-              <input
-                placeholder="Name..."
-                name="name"
-                value={user.name}
-                required
-              />
-            </p>
-          </div>
-          <div className="flex">
-            <p>
-              <input
-                type="email"
-                name="email"
-                value={user.email}
-                placeholder="E-mail..."
-                required
-              />
-            </p>
-          </div>
-          <div className="flex">
-            <p>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={user.password}
-                placeholder="Password"
-                required
-              />
-              <i className="fas fa-eye" id="open" onClick={toggle}></i>
-              <i className="fas fa-eye-slash" id="close" onClick={toggle}></i>
-            </p>
-          </div>
-          <div className="flex">
-            <p>
-              <input
-                placeholder="Phone..."
-                name="phone"
-                type="text"
-                value={user.phone}
-                required
-              />
-            </p>
-          </div>
+      <h1 className="title">REGISTER</h1>
+      <form className="login-form">
+        <div className="inp">
+          <input placeholder="Name..." name="name" value={user.name} required />
+        </div>
+        <div className="inp">
+          <input
+            type="email"
+            name="email"
+            value={user.email}
+            placeholder="E-mail..."
+            required
+          />
+        </div>
+        <div className="inp">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={user.password}
+            placeholder="Password"
+            required
+          />
+          <i className="fas fa-eye" id="open" onClick={toggle}></i>
+          <i className="fas fa-eye-slash" id="close" onClick={toggle}></i>
+        </div>
+        <div className="inp">
+          <input
+            placeholder="Phone..."
+            name="phone"
+            type="text"
+            value={user.phone}
+            required
+          />
         </div>
         <button className="btn btn-primary" onClick={submitHandler}>
           Register

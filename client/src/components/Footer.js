@@ -6,6 +6,7 @@ const Footer = () => {
     <footer>
       <div className="footer">
         <div className="brand-title footer-title">
+          <img src="./favicon.png" className="logo" alt="Client Connect" />
           <Link>
             <h1>Client Connect</h1>
           </Link>

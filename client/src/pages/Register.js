@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import BackIcon from "../components/BackIcon";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -10,21 +17,19 @@ const Register = () => {
     email: "",
     password: "",
     phone: "",
+    captcha: "",
   });
+  const [open, setOpen] = useState(false);
+  const passRef = useRef();
+
+  useEffect(() => {
+    loadCaptchaEnginge(5, "cyan");
+  }, []);
 
   const toggle = () => {
-    // if (state) {
-    //   document.getElementById("password").setAttribute("type", "password");
-    //   state = false;
-    //   document.getElementById("open").style.display = "inline-block";
-    //   document.getElementById("close").style.display = "none";
-    // } else {
-    //   document.getElementById("password").setAttribute("type", "text");
-    //   state = true;
-    //   document.getElementById("open").style.display = "none";
-    //   document.getElementById("close").style.display = "inline-block";
-    // }
-    console.log("hello");
+    setOpen(!open);
+    if (passRef.current.type === "text") passRef.current.type = "password";
+    else passRef.current.type = "text";
   };
 
   const changeHandler = (e) => {
@@ -84,13 +89,19 @@ const Register = () => {
               id="password"
               title="Password"
               name="password"
+              ref={passRef}
               value={user.password}
               onChange={changeHandler}
               placeholder="Password"
               required
             />
-            <i className="fas fa-eye" id="open" onClick={toggle}></i>
-            <i className="fas fa-eye-slash" id="close" onClick={toggle}></i>
+            <div className="eye-icon">
+              {open ? (
+                <VisibilityIcon onClick={toggle} />
+              ) : (
+                <VisibilityOffIcon onClick={toggle} />
+              )}
+            </div>
           </div>
           <div className="inp">
             <input
@@ -101,6 +112,20 @@ const Register = () => {
               maxLength={10}
               value={user.phone}
               onChange={changeHandler}
+              required
+            />
+          </div>
+          <div className="inp captcha">
+            <div className="text">
+              <LoadCanvasTemplate reloadText="Regenerate" />
+            </div>
+            <input
+              type="text"
+              title="captcha"
+              name="captcha"
+              value={user.captcha}
+              onChange={changeHandler}
+              placeholder="Captcha..."
               required
             />
           </div>

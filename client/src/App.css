@@ -40,6 +40,14 @@ h1{
   cursor: pointer;
 }
 
+.eye-icon{
+  position: absolute;
+  cursor: pointer;
+  top: 30%;
+  z-index: 1;
+  right: 11px;
+}
+
 .arrow{
   transition: transform 2s;
 }
@@ -75,10 +83,13 @@ h1{
   flex-direction: column;
   flex-basis: 100%;
   align-items: center;
+  position: relative;
 }
 
 .inp{
   margin: 0.4rem 0;
+  text-align: center;
+  position: relative;
 }
 
 .inp > input{
@@ -100,6 +111,21 @@ h1{
   box-shadow: 0px 5px 0px blue;
   border: 2px solid blue;
   outline: none;
+}
+
+.text{
+  text-align: center;
+  color: #9e9aa7;
+  font-size: 15px;
+}
+
+.captcha > input{
+  border-radius: 20px;
+  box-shadow: 0px 5px 0px #888888;
+  border: 2px solid #888888;
+  height: 1rem;
+  padding: 5px 10px;
+  width: 50%;
 }
 
 .btngrp{

@@ -3,9 +3,6 @@
 ### Developers:
 
 - Naman Agarwal - 12011002 - [Github](https://github.com/NamanAgarwal214) -OP
-- Satwik Pal - 12011018 - [Github](https://github.com/Satwik-pal-git)
-- Gunjan Ashok Bhanarkar - 12011014 - [Github](https://github.com/gunjan1909)
-
 <hr/>
 
 ## [Main Doc File](https://docs.google.com/document/d/1yXOSfBNzaXp3HZuw852CfIY1i0SxuzujjwHUv3dSrEI/edit)
@@ -23,4 +20,4 @@
 - public- images, css and js files for frontend ie assets
 - server- all important code related to backend, routes, controllers etc.
 - views- frontend ejs html files which are displayed
-- static frontend- static html css js files used for development of static frontend pages (Developer- Gunjan)
+- client- react frontend

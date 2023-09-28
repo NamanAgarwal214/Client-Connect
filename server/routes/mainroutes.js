@@ -14,9 +14,9 @@ const router = require("express").Router();
 //   }
 // };
 
-// router.get("/", (req, res) => {
-//   res.render("landing_page");
-// });
+router.get("/", (req, res) => {
+  res.render("landing_page");
+});
 
 // // ------------------- Routing for dashboard using google oauth--------------------
 

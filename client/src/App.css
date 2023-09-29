@@ -334,63 +334,40 @@ h1{
 .sideNav{
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  max-width: 20vw;
+  max-width: 30vw;
   height: 100vh;
-  /* gap: 5vh; */
+  gap: 5vh;
   background-color: #9e9aa7;
 }
 
-/* .side-title{
+.side-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 0 0 auto;
-  flex-basis: calc(25% - 10px);
+}
+
+.side-header > div {
+  flex-basis: 50%;
 }
 
 .side-logo{
-  max-width: 40%;
-  max-height: 40%;
+  width: 100%;
+  height: auto;
 }
 
-.side-logo, .side-title > h1{
- flex: 1 1 auto;
- flex-basis: 50%; 
-} */
+.side-title{
+  left: 2vw;
+}
 
 .sideLinks{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  /* height: 60vh; */
-  flex-basis: calc(90vh + 10px);
+  justify-content: center;
+  flex: 0 0 auto;
 }
 
 .opt-1{
-  width: 20vw;
-  padding: 0 5px;
   display: flex;
-  justify-content: space-around;
-}
-
-.side-logo{
-  max-width: 40%;
-  max-height: 40%;
-  object-fit: contain;
-}
-
-.side-title{
-  font-size: 1rem;
-}
-
-.opt-1 > div:nth-child(1){
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.opt-1 > div:nth-child(2) {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
 }

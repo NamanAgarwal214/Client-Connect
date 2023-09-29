@@ -8,19 +8,15 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const SideNavbar = () => {
   return (
     <div className="sideNav">
-      <div className="sideLinks">
-        <div className="opt-1">
-          <div>
-            <img
-              src="./favicon.png"
-              className="side-logo"
-              alt="Client Connect"
-            />
-          </div>
-          <div>
-            <h1 className="side-title">Client Connect</h1>
-          </div>
+      <div className="side-header">
+        <div>
+          <img src="./favicon.png" className="side-logo" alt="Client Connect" />
         </div>
+        <div>
+          <h1 className="side-title">Client Connect</h1>
+        </div>
+      </div>
+      <div className="sideLinks">
         <div className="opt-1">
           <div>
             <DashboardIcon color="white" className="side-logo" />

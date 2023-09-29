@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BackIcon from "../components/BackIcon";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -10,6 +10,8 @@ import {
 } from "react-simple-captcha";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -21,6 +23,7 @@ const Register = () => {
   });
   const [open, setOpen] = useState(false);
   const passRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadCaptchaEnginge(5, "cyan");
@@ -38,12 +41,36 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    Object.values(user).forEach((val) => {
-      if (val === "") return;
-      // error
-    });
+
+    for (let key in user) {
+      if (user.hasOwnProperty(key)) {
+        let value = user[key];
+        if (value === "") {
+          toast.error("Please fill all fields");
+          return;
+        }
+      }
+    }
+    if (!validateCaptcha(user.captcha)) {
+      toast.error("Please enter the captcha correctly");
+      loadCaptchaEnginge(5, "cyan");
+      return;
+    }
     try {
+      const res = await axios.post("/register", user, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.data.status === "success") {
+        // success
+        toast.success("Registered successfully");
+        navigate("/");
+      } else {
+        toast.error(res.data.message);
+      }
     } catch (error) {
+      toast.error("Something went wrong");
       console.log(error.message);
     }
   };

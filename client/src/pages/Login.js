@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import BackIcon from "../components/BackIcon";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  validateCaptcha,
-} from "react-simple-captcha";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -18,6 +15,7 @@ const Login = () => {
   });
   const [open, setOpen] = useState(false);
   const passRef = useRef();
+  const navigate = useNavigate();
 
   const toggle = () => {
     setOpen(!open);
@@ -31,12 +29,30 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    Object.values(user).forEach((val) => {
-      if (val === "") return;
-      // error
-    });
+    for (let key in user) {
+      if (user.hasOwnProperty(key)) {
+        let value = user[key];
+        if (value === "") {
+          toast.error("Please fill all fields");
+          return;
+        }
+      }
+    }
     try {
+      const res = await axios.post("/login", user, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.data.status === "success") {
+        // success
+        toast.success("Logged in successfully");
+        navigate("/");
+      } else {
+        toast.error(res.data.message);
+      }
     } catch (error) {
+      toast.error("Something went wrong");
       console.log(error.message);
     }
   };

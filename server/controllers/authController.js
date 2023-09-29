@@ -8,36 +8,43 @@ const { issueToken } = require("../utils/token");
 require("dotenv").config();
 
 exports.register = async (req, res) => {
+  const { name, email, password, phone } = req.body;
+  if (!name || !email || !password || !phone)
+    throw new Error("Missing Credentials");
   try {
     const oldUser = await User.findOne({ email: req.body.email });
     if (oldUser) {
-      return res.render("signup_multiform");
+      throw new Error("Email Address Already exists");
     }
     const user = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      phone: `+91${req.body.phone}`,
+      name,
+      email,
+      password,
+      phone: `+91${phone}`,
     });
 
     await user.save();
-    // sendOtp(req.body.phone);
 
     const token = issueToken(res, user);
-    res.locals.user = { user: user, token: token };
-    res.render("signup_multiform");
+
+    return res.status(200).json({
+      status: "success",
+      token,
+      user,
+    });
   } catch (err) {
-    // return res.json({
-    //   status: "error",
-    //   message: err.message,
-    // });
-    console.log(err.message);
+    return res.json({
+      status: "error",
+      message: err.message,
+    });
+    // console.log(err.message);
   }
 };
 
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    if (!email || !password) throw new Error("Missing Credentials");
 
     const user = await User.findOne({ email }).select("+password");
 
@@ -49,12 +56,16 @@ exports.login = async (req, res, next) => {
 
     issueToken(res, user);
     const token = issueToken(res, user);
-    res.locals.user = { user: user, token: token };
-    return next();
+
+    return res.status(200).json({
+      status: "success",
+      token,
+      user,
+    });
   } catch (error) {
     return res.json({
       status: "error",
-      message: err.message,
+      message: error.message,
     });
   }
 };
@@ -86,12 +97,21 @@ exports.protect = (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
-  res.cookie("jwt", "logged out", {
-    expires: new Date(Date.now() + 10 * 1000), //expires in 10 seconds
-    httpOnly: true,
-  });
+  try {
+    res.cookie("jwt", "logged out", {
+      expires: new Date(Date.now() + 10 * 1000), //expires in 10 seconds
+      httpOnly: true,
+    });
 
-  next();
+    return res.status(200).json({
+      status: "success",
+    });
+  } catch (error) {
+    return res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 };
 
 exports.forgotPassword = async (req, res, next) => {

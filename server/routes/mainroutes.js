@@ -202,6 +202,12 @@ router.post("/register", authController.register);
 //   }
 // );
 
+router.get("/createPost", (req, res) => {
+  res.render("create-post", {
+    id: "123",
+    pic: "12",
+  });
+});
 // router.get("/createPost/:id", authController.protect, async (req, res) => {
 //   const user = await User.findById(req.params.id);
 //   res.render("create-post", {

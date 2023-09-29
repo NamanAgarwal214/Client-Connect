@@ -1,7 +1,8 @@
 import React from "react";
+import Dashboard from "./Dashboard";
 
 const HomeIn = () => {
-  return <div>HomeIn</div>;
+  return <Dashboard />;
 };
 
 export default HomeIn;

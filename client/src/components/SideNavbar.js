@@ -17,17 +17,17 @@ const SideNavbar = () => {
         </div>
       </div>
       <div className="sideLinks">
-        <div className="opt-1">
+        <div className={`opt-1`}>
           <div>
-            <DashboardIcon color="white" className="side-logo" />
+            <DashboardIcon fontSize="large" className="side-logo" />
           </div>
           <div>
             <p>Dashboard</p>
           </div>
         </div>
-        <div className="opt-1">
+        <div className={`opt-1`}>
           <div>
-            <StorefrontIcon className="side-logo" />
+            <StorefrontIcon fontSize="large" className="side-logo" />
           </div>
           <div>
             <p>Provider</p>
@@ -35,7 +35,7 @@ const SideNavbar = () => {
         </div>
         <div className="opt-1">
           <div>
-            <HailIcon className="side-logo" />
+            <HailIcon fontSize="large" className="side-logo" />
           </div>
           <div>
             <p>Customer</p>
@@ -43,7 +43,7 @@ const SideNavbar = () => {
         </div>
         <div className="opt-1">
           <div>
-            <HelpIcon className="side-logo" />
+            <HelpIcon fontSize="large" className="side-logo" />
           </div>
           <div>
             <p>Help</p>
@@ -51,7 +51,7 @@ const SideNavbar = () => {
         </div>
         <div className="opt-1">
           <div>
-            <LogoutIcon className="side-logo" />
+            <LogoutIcon fontSize="large" className="side-logo" />
           </div>
           <div>
             <p>Sign Out</p>

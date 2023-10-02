@@ -338,6 +338,7 @@ h1, h2, h3, h4, h5, h6{
   max-width: 20vw;
   height: 100vh;
   gap: 5vh;
+  padding: 5px 10px;
   background-color: #212529;
 }
 

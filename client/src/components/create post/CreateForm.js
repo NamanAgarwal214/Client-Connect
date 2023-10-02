@@ -1,41 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import BackIcon from "../BackIcon";
-import {
-  LoadCanvasTemplate,
-  loadCaptchaEnginge,
-  validateCaptcha,
-} from "react-simple-captcha";
+import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Ques1 from "./Ques1";
+import Ques2 from "./Ques2";
+import Ques3 from "./Ques3";
+import { useNavigate } from "react-router-dom";
 
 const CreateForm = () => {
   const [user, setUser] = useState({
     role: "",
+    category: "",
+    name: "",
+    description: "",
+    price: "",
   });
-
-  const [radio, setRadio] = useState("");
-
-  const [open, setOpen] = useState();
-  const passRef = useRef();
+  const [active, setActive] = useState(false);
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
-
-  //   useEffect(() => {
-  //     loadCaptchaEnginge(5, "cyan");
-  //   }, []);
-
-  const toggle = () => {
-    setOpen(!open);
-    if (passRef.current.type === "text") passRef.current.type = "password";
-    else passRef.current.type = "text";
-  };
 
   const changeHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
-    setRadio(e.target.value);
-    console.log("hello");
+    if (e.target.name === "role") {
+      setActive(!active);
+    }
   };
 
   const submitHandler = async (e) => {
@@ -50,11 +37,6 @@ const CreateForm = () => {
         }
       }
     }
-    if (!validateCaptcha(user.captcha)) {
-      toast.error("Please enter the captcha correctly");
-      loadCaptchaEnginge(5, "cyan");
-      return;
-    }
     try {
       const res = await axios.post("/register", user, {
         headers: {
@@ -63,7 +45,7 @@ const CreateForm = () => {
       });
       if (res.data.status === "success") {
         // success
-        toast.success("Registered successfully");
+        toast.success(`${user.role} added successfully`);
         navigate("/");
       } else {
         toast.error(res.data.message);
@@ -80,39 +62,38 @@ const CreateForm = () => {
         <h1>ADD PRODUCT / SERVICE</h1>
       </div>
       <div className="addform">
-        <form>
-          <div className="addform-1">
-            <div className="ques">
-              <h4>What are you adding?</h4>
-            </div>
-            <div className="option">
-              <div
-                id="prod"
-                name="role"
-                onClick={changeHandler}
-                className="abc"
-                aria-selected={user.role === "product"}
+        <form onSubmit={submitHandler}>
+          {page === 1 && (
+            <Ques1 active={active} user={user} changeHandler={changeHandler} />
+          )}
+          {page === 2 && <Ques2 user={user} changeHandler={changeHandler} />}
+          {page === 3 && <Ques3 user={user} changeHandler={changeHandler} />}
+
+          <div className="form-btn">
+            {page > 1 && (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setPage(page - 1)}
               >
-                Option 1
-              </div>
-              {/* <div
-                id="serv"
-                name="role"
-                value="service"
-                onClick={changeHandler}
+                Previous
+              </button>
+            )}
+            {page <= 2 && (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setPage(page + 1)}
               >
-                <input
-                  type="radio"
-                  id="serv"
-                  name="role"
-                  value="service"
-                  onChange={changeHandler}
-                />
-                <label htmlFor="serv">Option 2</label>
-              </div> */}
-            </div>
+                {page == 3 ? "Submit" : "Next"}
+              </button>
+            )}
+            {page === 3 && (
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            )}
           </div>
-          {/* <button onClick={submitHandler}>Submit</button> */}
         </form>
       </div>
     </div>

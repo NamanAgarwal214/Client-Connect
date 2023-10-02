@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateForm = () => {
   const [user, setUser] = useState({
-    role: "",
+    role: "service",
     category: "",
     name: "",
     description: "",

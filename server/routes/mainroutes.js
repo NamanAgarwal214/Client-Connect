@@ -63,30 +63,30 @@ router.get("/", (req, res) => {
 
 // // -----------------------Routing for dashboard using Register ----------------------------------
 // var userdetails;
-// router.get(
-//   "/dashboard",
-//   authController.protect,
-//   postController.getUserPosts,
-//   async (req, res) => {
-//     let oldUser = await User.find({ email: req.body.email });
-//     oldUser.forEach((obj) => {
-//       userdetails = obj;
-//     });
-//     try {
-//       res.render("dashboard", {
-//         id: userdetails._id + "",
-//         name: userdetails.name,
-//         gmail: userdetails.email,
-//         phone: userdetails.phone,
-//         pic: userdetails.photo,
-//         num: res.locals.number,
-//         post: res.locals.data,
-//       });
-//     } catch (err) {
-//       res.redirect("/");
-//     }
-//   }
-// );
+router.get(
+  "/dashboard",
+  //   authController.protect,
+  //   postController.getUserPosts,
+  async (req, res) => {
+    //     let oldUser = await User.find({ email: req.body.email });
+    //     oldUser.forEach((obj) => {
+    //       userdetails = obj;
+    //     });
+    try {
+      res.render("dashboard", {
+        id: "abc1" + "as",
+        name: "abc1",
+        gmail: "abc1",
+        phone: "abc1",
+        pic: "abc1",
+        num: "3",
+        post: "3",
+      });
+    } catch (err) {
+      res.redirect("/");
+    }
+  }
+);
 
 router.get("/register", (req, res) => {
   res.render("signup_multiform");

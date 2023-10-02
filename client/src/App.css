@@ -14,6 +14,14 @@ body{
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
+  background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00000073;
+  border-radius: 10px;
+  background-clip: padding-box;
+  padding: 1px !important;
 }
 
 a{
@@ -187,6 +195,11 @@ h1, h2, h3, h4, h5, h6{
   object-fit: contain;
 }
 
+.dp{
+  border-radius: 100%;
+  border: 2px solid rgba(0, 0, 255, 0.7);
+}
+
 .btns{
   display: flex;
   justify-content: right;
@@ -338,7 +351,7 @@ h1, h2, h3, h4, h5, h6{
   max-width: 20vw;
   height: 100vh;
   gap: 5vh;
-  padding: 5px 10px;
+  padding: 0 15px;
   background-color: #212529;
 }
 
@@ -405,12 +418,17 @@ h1, h2, h3, h4, h5, h6{
   display: flex;
 }
 
+/* .right-create{
+  display: flex;
+  flex-direction: column;
+} */
+
 /* create form */
 .addform-container{
   width: -webkit-fill-available;
   display: flex;
   flex-direction: column;
-  background-color: antiquewhite;
+  background-color: rgba(255, 255, 255, 0.2);
   
 }
 

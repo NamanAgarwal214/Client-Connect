@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BackIcon from "../components/BackIcon";
 import Navbar from "../components/Navbar";
@@ -8,6 +8,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Layout from "../components/Layout";
+import { DispatchContext } from "../context/Context";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -17,6 +18,7 @@ const Login = () => {
   const [open, setOpen] = useState(false);
   const passRef = useRef();
   const navigate = useNavigate();
+  const dispatch = useContext(DispatchContext);
 
   const toggle = () => {
     setOpen(!open);
@@ -48,6 +50,7 @@ const Login = () => {
       if (res.data.status === "success") {
         // success
         toast.success("Logged in successfully");
+        dispatch({ type: "login", token: res.data.token, user: res.data.user });
         navigate("/");
       } else {
         toast.error(res.data.message);

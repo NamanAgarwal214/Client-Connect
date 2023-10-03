@@ -1,7 +1,7 @@
 // const User = require("../models/userModel");
 const authController = require("../controllers/authController");
 // const userController = require("../controllers/userController");
-// const postController = require("../controllers/postController");
+const postController = require("../controllers/postController");
 // const authuser = require("../models/authModel");
 // const { verifyOtp } = require("../utils/twilio");
 const router = require("express").Router();
@@ -87,42 +87,6 @@ router.get("/register", (req, res) => {
   res.render("signup_multiform");
 });
 
-router.post("/register", authController.register);
-
-// // -----------------------end of Routing for dashboard using Register ----------------------------------
-
-// router.get("/verifyOtp", authController.protect, (req, res) => {
-//   res.render("otp", {
-//     id: res.locals.id,
-//   });
-// });
-
-// router.post("/verifyOtp", authController.protect, verifyOtp, (req, res) => {
-//   if (res.locals.status === "approved") res.redirect("/dashboard");
-//   else {
-//     res.redirect(`/deleteUser/${res.locals.id}`);
-//   }
-// });
-
-// // -----------------------Routing for dashboard using login ----------------------------------
-
-// router.get("/login", (req, res) => {
-//   res.render("login_multiform");
-// });
-
-// router.post("/login", authController.login, async (req, res) => {
-//   // console.log(req.body);
-//   let oldUser = await User.find({ email: req.body.email });
-
-//   oldUser.forEach((obj) => {
-//     userdetails = obj;
-//   });
-//   setTimeout(() => {
-//     res.redirect("/dashboard");
-//   }, 1500);
-// });
-// // -----------------------end of routing for dashboard using login ----------------------------------
-
 // // -----------------------Routing for Profile ----------------------------------
 // router.get("/profile/:id", authController.protect, async (req, res) => {
 //   let user;
@@ -179,14 +143,7 @@ router.post("/register", authController.register);
 //   res.redirect("/login");
 // });
 
-// router.get(
-//   "/logout",
-//   authController.protect,
-//   authController.logout,
-//   (req, res) => {
-//     res.redirect("/");
-//   }
-// );
+router.get("/logout", authController.protect, authController.logout);
 // router.get("/getUser", authController.protect, userController.getUser);
 // router.get(
 //   "/deleteUser/:id",
@@ -197,30 +154,7 @@ router.post("/register", authController.register);
 //   }
 // );
 
-router.get("/createPost", (req, res) => {
-  res.render("create-post", {
-    id: "123",
-    pic: "12",
-  });
-});
-// router.get("/createPost/:id", authController.protect, async (req, res) => {
-//   const user = await User.findById(req.params.id);
-//   res.render("create-post", {
-//     id: req.params.id,
-//     pic: user.photo,
-//   });
-// });
-
-// router.post(
-//   "/createPost/:id",
-//   authController.protect,
-//   postController.newPost,
-//   (req, res) => {
-//     res.redirect(
-//       `/post/uploadImages/?user=${res.locals.id}&post=${res.locals.postId}`
-//     );
-//   }
-// );
+router.post("/createPost", authController.protect, postController.addPost);
 
 // router.get(
 //   "/customer",

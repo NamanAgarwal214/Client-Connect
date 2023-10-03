@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Ques1 from "./Ques1";
 import Ques2 from "./Ques2";
 import Ques3 from "./Ques3";
 import { useNavigate } from "react-router-dom";
+import { StateContext } from "../../context/Context";
 
 const CreateForm = () => {
   const [user, setUser] = useState({
@@ -17,6 +18,7 @@ const CreateForm = () => {
   const [active, setActive] = useState(false);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const { token } = useContext(StateContext);
 
   const changeHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -28,6 +30,8 @@ const CreateForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
+    console.log(user);
+
     for (let key in user) {
       if (user.hasOwnProperty(key)) {
         let value = user[key];
@@ -38,9 +42,10 @@ const CreateForm = () => {
       }
     }
     try {
-      const res = await axios.post("/register", user, {
+      const res = await axios.post("/createPost", user, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.data.status === "success") {
@@ -85,7 +90,7 @@ const CreateForm = () => {
                 className="btn btn-primary"
                 onClick={() => setPage(page + 1)}
               >
-                {page == 3 ? "Submit" : "Next"}
+                {page === 3 ? "Submit" : "Next"}
               </button>
             )}
             {page === 3 && (

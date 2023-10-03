@@ -34,6 +34,8 @@ const Ques2 = ({ user, changeHandler }) => {
             className="textarea"
             onChange={changeHandler}
             rows={5}
+            name="description"
+            value={user.description}
             cols={20}
             required
           />

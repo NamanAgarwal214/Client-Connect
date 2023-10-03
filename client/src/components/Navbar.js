@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import { StateContext } from "../context/Context";
 
 const Navbar = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const { loggedIn, user } = useContext(StateContext);
+
   return (
     <header>
       <div className="nav">
         <div className="brand-title">
-          {!loggedIn && (
+          {!loggedIn ? (
             <img src="./favicon.png" className="logo" alt="Client Connect" />
+          ) : (
+            <MenuIcon fontSize="large" className="" />
           )}
           <h1>{loggedIn ? "Welcome !!!" : "Client Connect"}</h1>
         </div>
         <div className="btns">
           {loggedIn && (
             <>
-              <h1>{"Naman"}</h1>
+              <h1>{user.name}</h1>
               <img
                 src="./favicon.png"
                 className="logo dp"

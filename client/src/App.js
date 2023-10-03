@@ -5,7 +5,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Side from "./components/Side";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:8000";
 
 function App() {
   return (

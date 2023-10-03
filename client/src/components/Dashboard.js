@@ -7,9 +7,9 @@ const Dashboard = () => {
   return (
     <Fragment>
       <div className="create">
-        <div className="left-create">
-          <SideNavbar />
-        </div>
+        {/* <div className="left-create"> */}
+        <SideNavbar />
+        {/* </div> */}
 
         <div className="right-create">
           <Navbar />

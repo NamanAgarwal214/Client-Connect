@@ -9,6 +9,7 @@ const fileUpload = require("express-fileupload");
 require("dotenv").config();
 const cron = require("node-cron");
 const fs = require("fs/promises");
+const cors = require("cors");
 const CookieSession = require("cookie-session");
 const ejs = require("ejs");
 const passport = require("passport");
@@ -20,6 +21,7 @@ app.set("views", path.join(__dirname, "../views"));
 // app.use(express.static("../public"));
 // app.use(express.static("../public/js"));
 //new added by me
+app.use(cors());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

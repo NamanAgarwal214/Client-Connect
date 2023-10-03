@@ -183,6 +183,12 @@ h1, h2, h3, h4, h5, h6{
   font-family: 'Eczar', serif;
 }
 
+.login-title{
+  justify-content: flex-start;
+  gap: 30px;
+  margin: 10px 15px;
+}
+
 .brand-title > h1{
   letter-spacing: 2px;
 }
@@ -198,14 +204,15 @@ h1, h2, h3, h4, h5, h6{
 .dp{
   border-radius: 100%;
   border: 2px solid rgba(0, 0, 255, 0.7);
+  width: 12%;
 }
 
 .btns{
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
-  flex-basis: 80%;
-  margin-right: 10%;
+  flex-basis: calc(50% + 10px);
+  margin: 10px 15px;
   gap: 25px;
 }
 
@@ -349,10 +356,15 @@ h1, h2, h3, h4, h5, h6{
   flex-direction: column;
   align-items: center;
   max-width: 20vw;
-  height: 100vh;
+  min-height: 100vh;
   gap: 5vh;
   padding: 0 15px;
   background-color: #212529;
+  transition: width 1s;
+}
+
+.close{
+  width: 5vw;
 }
 
 .side-header{
@@ -418,10 +430,11 @@ h1, h2, h3, h4, h5, h6{
   display: flex;
 }
 
-/* .right-create{
+.right-create{
   display: flex;
   flex-direction: column;
-} */
+  width: -webkit-fill-available;
+}
 
 /* create form */
 .addform-container{

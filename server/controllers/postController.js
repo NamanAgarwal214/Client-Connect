@@ -50,10 +50,9 @@ exports.upload = async (req, res, next) => {
 //   storage: multerStorage,
 // }).array("image", 5);
 
-exports.newPost = async (req, res, next) => {
+exports.addPost = async (req, res, next) => {
   try {
-    // console.log(req);
-    const user = await User.findById(req.params.id);
+    const user = req.user;
     const newPost = new Post({
       name: req.body.name,
       price: req.body.price,
@@ -64,10 +63,16 @@ exports.newPost = async (req, res, next) => {
     await newPost.save();
     await user.posts.push(newPost);
     await user.save();
-    res.locals.postId = newPost._id;
-    next();
+
+    return res.status(200).json({
+      status: "success",
+      newPost,
+    });
   } catch (err) {
-    console.log(err.message);
+    return res.json({
+      status: "error",
+      message: err.message,
+    });
   }
 };
 

@@ -70,29 +70,44 @@ exports.login = async (req, res, next) => {
   }
 };
 
-exports.protect = (req, res, next) => {
-  let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    token = req.headers.authorization.split(" ")[1];
-  } else if (req.cookies.jwt) {
-    token = req.cookies.jwt;
-  }
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-      if (err) {
-        console.log(err.message);
-        res.redirect("/");
-      } else {
-        // console.log(decodedToken);
-        res.locals.id = decodedToken.sub;
-        next();
-      }
-    });
-  } else {
-    res.redirect("/");
+exports.protect = async (req, res, next) => {
+  try {
+    let token;
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer")
+    ) {
+      token = req.headers.authorization.split(" ")[1];
+    } else if (req.cookies.jwt) {
+      token = req.cookies.jwt;
+    }
+
+    if (!token) {
+      throw new Error("You are not logged in! Please Log in again!");
+    }
+
+    // Verifying the token and decrypting it with the public key
+    //will return the payload associated with the JWT
+    const decodedUser = await promisify(jwt.verify)(
+      token,
+      process.env.JWT_SECRET
+    );
+    // console.log(decodedUser);
+
+    // finding user from the database with the decoded id
+
+    const user = await User.findOne({ _id: decodedUser.sub });
+
+    // console.log(user)
+    if (!user) {
+      throw new Error("The user belonging to this token does no longer exist.");
+    }
+
+    //adding the user to the request
+    req.user = user;
+    next();
+  } catch (error) {
+    res.json(error.message);
   }
 };
 

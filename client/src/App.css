@@ -299,6 +299,7 @@ h1, h2, h3, h4, h5, h6{
   display: flex;
   justify-content: center;
   flex: 1;
+  position: relative;
 }
 
 .landing-img{
@@ -545,4 +546,16 @@ h1, h2, h3, h4, h5, h6{
   justify-content: center;
   align-items: center;
   gap: 25px;
+}
+
+.one{
+  position: absolute;
+  left: 0;
+  width: 20%;
+} 
+.two{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 20%;
 }

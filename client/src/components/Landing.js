@@ -15,9 +15,9 @@ const Landing = () => {
         </Link>
       </div>
       <div className="landing-image">
-        {/* <img id="imgl" src="/Vector.png" alt="" /> */}
+        <img className="one" src="/Vector.png" />
         <img src="./client_resize.jpg" className="landing-img" alt="" />
-        {/* <img src="/Vector-1.png" alt="" id="imgr" /> */}
+        <img className="two" src="/Vector-1.png" alt="" />
       </div>
     </section>
   );

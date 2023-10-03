@@ -6,13 +6,8 @@ const authController = require("../controllers/authController");
 // const { verifyOtp } = require("../utils/twilio");
 const router = require("express").Router();
 
-// const authcheck = (req, res, next) => {
-//   if (!req.user) {
-//     res.redirect("/");
-//   } else {
-//     next();
-//   }
-// };
+router.post("/register", authController.register);
+router.post("/login", authController.login);
 
 router.get("/", (req, res) => {
   res.render("landing_page");

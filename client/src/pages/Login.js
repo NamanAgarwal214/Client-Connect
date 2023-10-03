@@ -7,6 +7,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Layout from "../components/Layout";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -60,7 +61,7 @@ const Login = () => {
   const forgotHandler = async () => {};
 
   return (
-    <>
+    <Layout title={"Login"}>
       <Navbar />
       <div className="container">
         <div className="titleDiv">
@@ -118,7 +119,7 @@ const Login = () => {
         </p>
       </div>
       <Footer />
-    </>
+    </Layout>
   );
 };
 

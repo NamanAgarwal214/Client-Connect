@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BackIcon from "../components/BackIcon";
 import Navbar from "../components/Navbar";
@@ -12,6 +12,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { DispatchContext } from "../context/Context";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -24,6 +25,7 @@ const Register = () => {
   const [open, setOpen] = useState(false);
   const passRef = useRef();
   const navigate = useNavigate();
+  const dispatch = useContext(DispatchContext);
 
   useEffect(() => {
     loadCaptchaEnginge(5, "cyan");
@@ -65,6 +67,7 @@ const Register = () => {
       if (res.data.status === "success") {
         // success
         toast.success("Registered successfully");
+        dispatch({ type: "login", token: res.data.token, user: res.data.user });
         navigate("/");
       } else {
         toast.error(res.data.message);

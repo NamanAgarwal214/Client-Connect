@@ -564,3 +564,23 @@ h1, h2, h3, h4, h5, h6{
   bottom: 0;
   width: 20%;
 }
+
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(31, 38, 135, 0.6);
+}
+
+.not-found-content {
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.not-found-content > h1{
+  color: red;
+}

@@ -6,6 +6,9 @@ import Register from "./pages/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Protect from "./helpers/Protect";
+import CreateForm from "./components/create post/CreateForm";
+import NotFound from "./helpers/NotFound";
 axios.defaults.baseURL = "http://localhost:8000";
 
 function App() {
@@ -28,6 +31,15 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route
+          path="/add-post"
+          element={
+            <Protect>
+              <CreateForm />
+            </Protect>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

@@ -74,7 +74,7 @@ router.get(
         gmail: "abc1",
         phone: "abc1",
         pic: "abc1",
-        num: "3",
+        num: "0",
         post: "3",
       });
     } catch (err) {

@@ -6,6 +6,7 @@ import Ques2 from "./Ques2";
 import Ques3 from "./Ques3";
 import { useNavigate } from "react-router-dom";
 import { StateContext } from "../../context/Context";
+import Layout from "../Layout";
 
 const CreateForm = () => {
   const [user, setUser] = useState({
@@ -62,46 +63,52 @@ const CreateForm = () => {
   };
 
   return (
-    <div className="addform-container">
-      <div className="addform-title">
-        <h1>ADD PRODUCT / SERVICE</h1>
-      </div>
-      <div className="addform">
-        <form onSubmit={submitHandler}>
-          {page === 1 && (
-            <Ques1 active={active} user={user} changeHandler={changeHandler} />
-          )}
-          {page === 2 && <Ques2 user={user} changeHandler={changeHandler} />}
-          {page === 3 && <Ques3 user={user} changeHandler={changeHandler} />}
+    <Layout title={"Add Product / Service"}>
+      <div className="addform-container">
+        <div className="addform-title">
+          <h1>ADD PRODUCT / SERVICE</h1>
+        </div>
+        <div className="addform">
+          <form onSubmit={submitHandler}>
+            {page === 1 && (
+              <Ques1
+                active={active}
+                user={user}
+                changeHandler={changeHandler}
+              />
+            )}
+            {page === 2 && <Ques2 user={user} changeHandler={changeHandler} />}
+            {page === 3 && <Ques3 user={user} changeHandler={changeHandler} />}
 
-          <div className="form-btn">
-            {page > 1 && (
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => setPage(page - 1)}
-              >
-                Previous
-              </button>
-            )}
-            {page <= 2 && (
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => setPage(page + 1)}
-              >
-                {page === 3 ? "Submit" : "Next"}
-              </button>
-            )}
-            {page === 3 && (
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            )}
-          </div>
-        </form>
+            <div className="form-btn">
+              {page > 1 && (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => setPage(page - 1)}
+                >
+                  Previous
+                </button>
+              )}
+              {page <= 2 && (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => setPage(page + 1)}
+                >
+                  {page === 3 ? "Submit" : "Next"}
+                </button>
+              )}
+              {page === 3 && (
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
